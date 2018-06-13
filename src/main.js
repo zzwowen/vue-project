@@ -7,15 +7,14 @@ import store from './store';
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-
 import ElementUI from 'element-ui';
 import '@/assets/style/element-#D59B55/index.css';
 import '@/assets/style/index.css';
-
+import './register';
 new Vue({
   el: '#app',
   router,
   store,
   components: { App },
   template: '<App/>'
-})
+});

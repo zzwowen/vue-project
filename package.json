@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "element-ui": "^2.4.1",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.10",
+    "pushstate-server": "^3.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -47,7 +50,7 @@
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
-    "webpack": "^3.6.0",
+    "webpack": "2.4.1",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
