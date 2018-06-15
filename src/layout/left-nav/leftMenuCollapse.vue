@@ -1,7 +1,14 @@
 <template lang="html">
   <div class="left-menu-collapse">
     <div :class="['left-menu-collaps-title',{'open':show}]" @click.stop="setShow">
-      <span>{{title}}</span>
+      <el-tooltip :disabled=$store.state.navMenu.leftMenu_flag class="left-menu-tooltip" effect="dark" :content="title" placement="left-start">
+      <div class="left-menu-collaps-title-icon">
+        <i :class="icon"></i>
+      </div>
+      </el-tooltip>
+      <div class="left-menu-collaps-title-text">
+        {{title}}
+      </div>
       <span :class="['con-collapse-title-icon',{'open':show}]">	<i class="el-icon-arrow-down"></i></span>
     </div>
     <div class="left-menu-collaps-content" id="left-menu-collaps-content">
@@ -20,6 +27,14 @@ export default {
       isShow:{
         type:Boolean,
         default:false
+      },
+      icon:{
+        type:String,
+        default:''
+      },
+      isFold:{
+        type:Boolean,
+        default:false
       }
 	},
   data(){
@@ -30,7 +45,7 @@ export default {
   methods:{
     setShow(e){
 
-      if(e==='af'){
+      if(e==='init'){
         if(!this.show===true){
             this.$$lib_$(this.$el).parent().find(".left-menu-collaps-content").animate({ height:'toggle'});
         }
@@ -42,7 +57,7 @@ export default {
   },
   created(){
     this.$nextTick(()=>{
-      this.setShow('af');
+      this.setShow('init');
     })
 
   }
@@ -50,40 +65,7 @@ export default {
 }
 </script>
 
-<style lang="css">
-.left-meun-collapse{
-  position: relative;
-  width: 100%;
-  font-size: 14px;
-}
-.left-menu-collaps-title{
-    width: 100%;
-		height: 40px;
-		line-height: 40px;
-		/* border: 1px solid #d9dbdb; */
-		border-radius: 3px;
-		background-color: #fff;
-		cursor: pointer;
-    box-sizing:border-box;
-
-
-}
-.left-menu-collaps-title.open{
-  border-bottom: 1px solid #ddd;
-}
-.left-menu-collaps-title:hover{
-  color: #fff;
-  background-color: #409eff;
-}
-.con-collapse-title-icon {
-		float: right;
-		right: 5%;
-    position: absolute;
-    transition: all .3s;
-		transform: rotate(0deg);
-	}
-	.con-collapse-title-icon.open {
-		transform: rotate(180deg);
-	}
+<style lang="less" scoped>
+@import url("./assets/style/style.less");
 
 </style>

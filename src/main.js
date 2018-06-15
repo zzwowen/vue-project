@@ -8,8 +8,12 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 import ElementUI from 'element-ui';
+Vue.use(ElementUI, {
+    size: 'small'
+});
 import '@/assets/style/element-#D59B55/index.css';
 import '@/assets/style/index.css';
+import 'font-awesome/css/font-awesome.css';
 import './register';
 new Vue({
   el: '#app',

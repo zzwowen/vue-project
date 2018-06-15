@@ -1,20 +1,39 @@
 <template lang="html">
-  <div class="content">
-    <ul>
+  <div class="content" :style="{width:contentWidth}">
+    <div class="top">
+      <div :class="['top-icon',{'isFold':isFold}]" @click="toggleShow">
+        <i class="fa fa-bars" ></i>
+      </div>
+    </div>
+    <ul :class="['menu-content',{'menu-content-fold':isFold}]">
       <li   v-if="!item.hidden && $route.matched.length && $route.matched[0].path===item.path" v-for="item in  $router.options.routes">
         <ul v-if="item.children&&item.children.length>0" >
-          <li v-for="(itemChild,index) in item.children" @click="changeRouter(item.path+'/'+itemChild.path,itemChild)"   :class="['item',{'active-router':item.path+'/'+itemChild.path===$store.state.router.leftCurRouter&&!itemChild.children,'single-route':!itemChild.children}]">
-              <left-menu-collapse :isShow="index===0?true:false" :title="itemChild.name" v-if="itemChild.children&&itemChild.children.length>0">
-                <ul v-if="itemChild.children&&itemChild.children.length>0">
-                  <li v-for="twoLevelMenu in itemChild.children" @click.stop="changeTwoRouter(item.path+'/'+itemChild.path+'/'+twoLevelMenu.path)" :class="['seconditem',{'twolevel-active-router':item.path+'/'+itemChild.path+'/'+twoLevelMenu.path===$store.state.router.leftCurRouter}]" >
-                  <div class="itemborder animated fadeIn"></div>
-                   {{twoLevelMenu.name}}
+          <li v-for="(oneLevel,index) in item.children" @click="changeRouter(item.path+'/'+oneLevel.path,oneLevel)"   :class="['onelevel-menu',{'onelevel-active-router':item.path+'/'+oneLevel.path===$store.state.router.leftCurRouter&&!oneLevel.children,'onelevel-single-route':!oneLevel.children}]">
+              <left-menu-collapse :isFold="isFold" :icon="oneLevel.icon" :isShow="$store.state.router.leftCurRouter.includes(item.path+'/'+oneLevel.path)?true:false" :title="oneLevel.name" v-if="oneLevel.children&&oneLevel.children.length>0">
+                <ul v-if="oneLevel.children&&oneLevel.children.length>0">
+                  <li v-for="twoLevel in oneLevel.children" @click.stop="changeTwoRouter(item.path+'/'+oneLevel.path+'/'+twoLevel.path)" :class="['twolevel-menu',{'twolevel-active-router':item.path+'/'+oneLevel.path+'/'+twoLevel.path===$store.state.router.leftCurRouter}]" >
+                      <el-tooltip  :disabled=!isFold class="left-menu-tooltip" effect="dark" :content="twoLevel.name" placement="left-start">
+                        <div class="twolevel-menu-icon">
+                          <i :class="twoLevel.icon"></i>
+                        </div>
+                      </el-tooltip>
+                    <div class="twolevel-menu-text">
+                      {{twoLevel.name}}
+                    </div>
                   </li>
                 </ul>
               </left-menu-collapse>
-              <span v-if="!itemChild.children">
-                {{itemChild.name}}
-              </span>
+              <div v-if="!oneLevel.children" class="onelevel-menu-label-content">
+                <el-tooltip :disabled=!isFold class="left-menu-tooltip" effect="dark" :content="oneLevel.name" placement="left-start">
+                <div class="onelevel-menu-icon">
+                  <i :class="oneLevel.icon"></i>
+                </div>
+                </el-tooltip>
+                <div class="onelevel-menu-text">
+                  {{oneLevel.name}}
+                </div>
+
+              </div>
           </li>
         </ul>
       </li>
@@ -33,19 +52,17 @@ export default {
      data() {
          return {
            cRouter:[]
+
          }
      },
      methods: {
        changeRouter(item,route){
           if(item&&!route.children){
             this.$router.push(item);
-          }else if(route.children&&route.children.length>0){
-
           }
        },
        changeTwoRouter(item){
          if(item){
-
            this.$router.push(item);
          }
        },
@@ -57,6 +74,13 @@ export default {
               rootPath,
               fullPath
           });
+       },
+       toggleShow(){
+          if(!this.isFold){
+            this.$store.dispatch('set_leftmenu_close');
+          }else{
+            this.$store.dispatch('set_leftmenu_open');
+          }
        }
      },
      created() {
@@ -65,28 +89,44 @@ export default {
      mounted() {
 
      },
+     computed:{
+       contentWidth(){
+         return  this.$store.state.navMenu.leftMenuWidth+'px'
+
+       },
+       isFold(val){
+           return !this.$store.state.navMenu.leftMenu_flag
+       }
+     },
      watch:{
        '$route' (to, from ,next) {
             this.setCurRouter(to);
           // 对路由变化作出响应...
-        }
+        },
+
      }
  }
 </script>
 
-<style lang="css" scoped>
-/* @import url("@/assets/style/animate.css"); */
+<style lang="less" scoped>
+@import url("./assets/style/style.less");
+/*
 .content{
 
   width: 200px;
   border: 1px solid #ddd;
+}
+.top{
+  height: 40px;
+  width: 100%;
+  background-color: #808080;
+  position: relative;
 }
 .item,.seconditem{
   min-height: 40px;
   line-height: 40px;
   width: 100%;
   background-color: #fff;
-  /* border-bottom: 1px solid #222; */
   cursor: pointer;
   transition: all .3s;
   text-align:center;
@@ -141,7 +181,7 @@ background-color: #ddd;
   background-color:black;
   width:5px;
   animation: rubberBand 1s;
-}
+} */
 
 
 </style>

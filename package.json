@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "element-ui": "^2.4.1",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "pushstate-server": "^3.0.1",
@@ -31,6 +32,8 @@
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",

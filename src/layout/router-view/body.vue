@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="content">
     <header-nav></header-nav>
-    <left-nav class="left-nav" :style="{width:'200px',top:'75px',bottom:'0px'}"></left-nav>
-    <div class="view">
+    <left-nav class="left-nav" :style="{top:$store.state.navMenu.headHeight+topMargin+'px',bottom:'0px'}"></left-nav>
+    <div class="view" :style="{'left':$store.state.navMenu.leftMenuWidth+'px',top:$store.state.navMenu.headHeight+topMargin+'px'}">
       <keep-alive>
            <router-view></router-view>
       </keep-alive>
@@ -19,7 +19,13 @@ export default {
   name:"Body",
   components:{
     headerNav,leftNav
+  },
+  data(){
+    return {
+      topMargin:5
+    }
   }
+
 }
 </script>
 
@@ -32,11 +38,10 @@ margin: 0 auto;
 }
 .view{
   position: absolute;
-
-  top: 75px;
   left: 205px;
-  right: 5px;
-  bottom: 5px;
-  background-color: green;
+  right: 0px;
+  bottom: 0px;
+  
+  transition: all .3s;
 }
 </style>

@@ -1,0 +1,169 @@
+
+@content-backcolor: #fff;
+@top-height:40px;
+@top-backcolor:#ddd;
+@oneLevel-menu-height:40px;
+@twoLevel-menu-height:40px;
+@oneLevel-menu-actived-color:#fff;
+@oneLevel-menu-actived-backcolor:#409eff;
+@oneLevel-menu-hover-color:#409eff;
+@oneLevel-menu-hover-backcolor:#fff;
+@twoLevel-menu-actived-color:#fff;
+@twoLevel-menu-actived-backcolor:#409eff;
+@twoLevel-menu-hover-color:#409eff;
+@twoLevel-menu-hover-backcolor:#fff;
+@oneLevel-menu-borderColor:#ddd;
+@twoLevel-menu-borderColor:#fbf5ee;
+@collapse-title-icon-color:orange;
+@left-menu-transition:all .3s;
+.content{
+
+  background-color: @content-backcolor;
+  border: 1px solid #ddd;
+  transition: @left-menu-transition;
+  box-sizing: border-box;
+  overflow: hidden;
+  .top{
+    height: @top-height;
+    background-color: @top-backcolor;
+    .top-icon{
+      width: @top-height;
+      height: @top-height;
+      line-height: @top-height;
+      text-align: center;
+      float: right;
+      cursor: pointer;
+      transition: all .3s;
+      transform: rotate(0deg);
+
+    }
+    .top-icon.isFold{
+      transform: rotate(90deg);
+    }
+    .top-icon:hover{
+      color: #409eff;
+    }
+  }
+  .menu-content{
+    cursor: pointer;
+    .onelevel-menu{
+      width: 100%;
+      line-height: @oneLevel-menu-height;
+      font-weight: 500;
+      border-bottom:1px solid @oneLevel-menu-borderColor;
+      box-sizing: border-box;
+      overflow: hidden;
+      .left-meun-collapse{
+        position: relative;
+        width: 100%;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+      .left-menu-collaps-title{
+          width: 100%;
+      		height: @oneLevel-menu-height;
+      		line-height: @oneLevel-menu-height;
+      		cursor: pointer;
+          box-sizing:border-box;
+          overflow: hidden;
+      }
+      .left-menu-collaps-title.open{
+        border-bottom: 1px solid #ddd;
+      }
+      .left-menu-collaps-title:hover{
+        color: @oneLevel-menu-hover-color;
+        background-color: @oneLevel-menu-hover-backcolor;
+      }
+      .con-collapse-title-icon {
+          color: @collapse-title-icon-color;
+      		float: right;
+      		right: 5%;
+          position: absolute;
+          transition: all .3s;
+      		transform: rotate(0deg);
+      	}
+
+      .con-collapse-title-icon.open {
+      		transform: rotate(180deg);
+      	}
+      .left-menu-collaps-title-icon{
+        width: 40px;
+        float: left;
+        height: @oneLevel-menu-height;
+        line-height: @oneLevel-menu-height;
+        text-align: center;
+      }
+      .left-menu-collaps-title-text{
+        width: calc(100% - 40px);
+        float: left;
+        height: @oneLevel-menu-height;
+        line-height: @oneLevel-menu-height;
+        text-align: left;
+      }
+    }
+    .onelevel-menu.onelevel-single-route:hover{
+      color: @oneLevel-menu-hover-color;
+      background-color: @oneLevel-menu-hover-backcolor;
+    }
+    .onelevel-menu.onelevel-active-router{
+      color:@oneLevel-menu-hover-color;
+      background-color: @oneLevel-menu-actived-backcolor;
+
+    }
+    .onelevel-menu.onelevel-single-route.onelevel-active-router{
+      color: @oneLevel-menu-actived-color;
+      background-color: @oneLevel-menu-actived-backcolor;
+    }
+    .onelevel-menu-label-content{
+      height: @oneLevel-menu-height;
+      width: 100%;
+      overflow: hidden;
+    }
+    .onelevel-menu-icon{
+      width: 40px;
+      line-height: @oneLevel-menu-height;
+      float: left;
+      text-align: center;
+    }
+    .onelevel-menu-text{
+
+      float: left;
+      line-height: @oneLevel-menu-height;
+      text-align: left;
+    }
+    .twolevel-menu{
+      width: 100%;
+      height: @twoLevel-menu-height;
+      line-height: @twoLevel-menu-height;
+      font-weight: 400;
+      box-sizing: border-box;
+      border-bottom:1px solid @twoLevel-menu-borderColor;
+      overflow: hidden;
+    }
+     .twolevel-menu:last-child{
+      border-bottom: none;
+    }
+    .twolevel-menu:hover{
+      color: @twoLevel-menu-hover-color;
+      background-color: @twoLevel-menu-hover-backcolor;
+    }
+    .twolevel-menu.twolevel-active-router{
+      color: @twoLevel-menu-actived-color;
+      background-color: @twoLevel-menu-actived-backcolor;
+    }
+    .twolevel-menu-icon{
+      width: 40px;
+      line-height: @twoLevel-menu-height;
+      float: left;
+      text-align: center;
+    }
+    .twolevel-menu-text{
+      float: left;
+      line-height: @twoLevel-menu-height;
+      text-align: left;
+    }
+  }
+  .menu-content-fold   .con-collapse-title-icon{
+    display: none;
+  }
+}
